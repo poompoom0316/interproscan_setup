@@ -1,0 +1,7 @@
+-	modify common.mk
+-	install bamtools
+-	install bam2wig
+-	replace scripts
+-	make and install ag
+-	make and install others
+
