@@ -9,6 +9,7 @@ fi
 BLAST_OUT=$1
 INPUT_FASTA=$2
 OUTPUT_FASTA=$3
+keyword="hogehoge"
 #
 #BLAST_OUT="${cdd_out}/${idi}.txt"
 #INPUT_FASTA="${protein_path}"
@@ -25,10 +26,10 @@ if [ ! -f "${INPUT_FASTA}.fai" ]; then
     samtools faidx "$INPUT_FASTA"
 fi
 
-# 2. PKS_KS領域を抽出し、クエリごとに開始位置でソートして処理
-# grepで"PKS_KS"を含む行を抜き出し、
+# 2. keyword領域を抽出し、クエリごとに開始位置でソートして処理
+# grepでkeywordを含む行を抜き出し、
 # sort -k1,1 -k6,6n で「第1列(ID)で昇順」かつ「第6列(開始位置)で数値昇順」に並び替えます
-grep "PKS_KS" "$BLAST_OUT" | sort -k1,1 -k6,6n | awk -F'\t' '
+grep "${keyword}" "$BLAST_OUT" | sort -k1,1 -k6,6n | awk -F'\t' '
 {
     query_id = $1;
     start_pos = $6;
